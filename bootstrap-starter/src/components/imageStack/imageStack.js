@@ -68,7 +68,7 @@ class ImageStack extends Component{
                                          onMouseOver={this.handleOnMouseOver}
                                          onMouseOut={this.handleOnMouseOut}
                                          onClick={() => this.handleImageClick(obj)}
-                                         // style={{background: `url(${obj.image})`}}
+                                        // style={{background: `url(${obj.image})`}}
                                     >
                                         <img className={`image-fluid ${styles.imagesCss}`}
                                              src={obj.image} alt='hell' />
