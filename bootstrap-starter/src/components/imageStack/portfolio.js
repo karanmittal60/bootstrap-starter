@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-import styles from './ImageStack.module.css';
+import styles from './portfolio.module.css';
 
 import first from './images/first.jpeg'
 import second from './images/second.jpeg'
@@ -27,29 +27,33 @@ const imageArray = [
     {image: tenth, name: "tenth"},
 ]
 
-class ImageStack extends Component{
+class Portfolio extends Component{
 
     state = {
         imageArray,
         mouseHover: false,
         showGalleryModel: false,
+        imageIndex: '',
     }
 
-    handleImageClick = (object) => {
-        console.log("==handleImageClick==", object)
+    handleImageClick = (object, index) => {
+        console.log("==handleImageClick==", object, index)
         if( this.state.showGalleryModel ){
             this.setState({
-                showGalleryModel: false
+                showGalleryModel: false,
+                imageIndex: '',
             })
         } else {
             this.setState({
-                showGalleryModel: true
+                showGalleryModel: true,
+                imageIndex: index,
             })
         }
+
     }
 
     handleOnMouseOver= ( ) => {
-        console.log("==handleOnMouseOver==")
+        // console.log("==handleOnMouseOver==")
         this.setState({
             mouseHover: true,
         })
@@ -57,7 +61,7 @@ class ImageStack extends Component{
 
 
     handleOnMouseOut= ( ) => {
-        console.log("==handleOnMouseOut==")
+        // console.log("==handleOnMouseOut==")
         this.setState({
             mouseHover: false,
         })
@@ -68,31 +72,34 @@ class ImageStack extends Component{
         return(
             <Fragment>
                 <h1>ImageStack</h1>
-                <div className="container-fluid">
+                <div className="container">
                     <div className='row'>
                         {
-                            this.state.imageArray.map((obj, index) => {
-                                // console.log("==image==", obj)
-                                return <div className="col-sm-6">
-                                    <div className={` ${styles.imageDiv}`}
-                                         key={index}
-                                         onMouseOver={this.handleOnMouseOver}
-                                         onMouseOut={this.handleOnMouseOut}
-                                         onClick={() => this.handleImageClick(obj)}
-                                        // style={{background: `url(${obj.image})`}}
-                                    >
-                                        <img className={`image-fluid ${styles.imagesCss}`}
-                                             src={obj.image} alt='hell' />
-                                        <div>
-                                            <h1>{`${index} : ${obj.name}`}</h1>
-                                        </div>
+                            this.state.imageArray.map((imgObject, index) => {
+                                return <div key={index}
+                                            className={`col-sm-12 col-md-6 col-lg-6 ${styles.imageContainer}`}
+                                            onMouseOver={this.handleOnMouseOver}
+                                            onMouseOut={this.handleOnMouseOut}>
+                                    <img className={`img-fluid`}
+                                         src={first}
+                                         onClick={() => this.handleImageClick(imgObject, index)}
+                                         alt="first" />
+
+                                    <div className={this.state.mouseHover ? `${styles.textContainer}` : `${styles.textContainerHover}` } >
+                                        <span> hello</span>
                                     </div>
+
                                 </div>
+
                             })
                         }
                     </div>
                     {
-                        this.state.showGalleryModel ? <ImageGallery imageArray={this.state.imageArray} /> : <div></div>
+                        this.state.showGalleryModel ? <ImageGallery
+                                        imageArray={this.state.imageArray}
+                                        closePopup={this.handleImageClick}
+                                        imageIndex={this.state.imageIndex}
+                                    /> : <div></div>
                     }
 
                 </div>
@@ -101,4 +108,4 @@ class ImageStack extends Component{
     }
 }
 
-export default ImageStack;
+export default Portfolio;

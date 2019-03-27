@@ -1,0 +1,35 @@
+
+.imageContainer{
+
+    margin-top: 20px;
+    position: relative;
+
+
+}
+
+.imageContainer img{
+    opacity: 1;
+}
+.imageContainer:hover img{
+    opacity: 0.2;
+}
+
+
+
+.textContainer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /*background-color: #989898;*/
+    opacity: 1;
+    color: #334833;
+}
+
+.textContainerHover{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /*background-color: #989898;*/
+    opacity: 0;
+
+}
